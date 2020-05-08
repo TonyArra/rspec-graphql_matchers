@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'base_matcher'
 
 module RSpec
@@ -29,7 +31,9 @@ module RSpec
       private
 
       def matches_argument?(arg_name, arg_type)
+        camel_arg_name = GraphQL::Schema::Member::BuildType.camelize(arg_name.to_s)
         actual_arg = actual_field.arguments[arg_name.to_s]
+        actual_arg ||= actual_field.arguments[camel_arg_name]
 
         actual_arg && types_match?(actual_arg.type, arg_type)
       end
