@@ -10,7 +10,10 @@ before_script:
 script:
   - bundle exec rspec
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --debug --exit-code $TRAVIS_TEST_RESULT
+env:
+  global:
+    - CC_TEST_REPORTER_ID=e5cd4a574fae803227a1e16b9f825e827a1cc6e6f5e5204d4ae3092082210eee
 matrix:
   include:
     - name: "GraphQL 1.9.x"
